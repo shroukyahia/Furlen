@@ -1,0 +1,41 @@
+@extends('admin_dashboard')
+@section('admin')
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Blogs All Data </h4>
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Blog Title</th>
+                        <th>Blog Category</th>
+                        <th>Blog Paragraph</th>
+                        <th>Blog Image</th>
+                        <th>Blog price</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        @php($i = 1)
+                        	@foreach($blogs as $key => $item)
+                        <tr>
+                            <td> {{ $i++}} </td>
+                            <td> {{ $item->title }} </td>
+                            <td> {{ $item['category']['blog_category'] }} </td>
+                            <td> {{ $item->paragraph }} </td>
+                            <td> <img src="{{ asset($item->blog_image) }}" style="width: 60px; height: 50px;"> </td>
+                            <td> {{ $item->price }} </td>
+                            <td>
+                            <a href="{{ route('edit.blog',$item->id) }}" class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
+                            <a href="{{ route('delete.blog',$item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
+                        </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+@endsection
